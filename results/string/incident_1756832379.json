@@ -1,0 +1,84 @@
+{
+  "incident_id": "1756832379",
+  "now": "2025-09-03T01:59:39+09:00",
+  "elapsed_since_fire": 0,
+  "current_incident": {
+    "date": "2025-09-03",
+    "time": "01시 59분 39초",
+    "address": "",
+    "detail": "시애틀 동남구 청담동 한양수자인",
+    "type": "건물 화재"
+  },
+  "ai_prediction": {
+    "likely_location": "시애틀 동남구 청담동 한양수자인",
+    "cause": null,
+    "risk_level": {
+      "label": "높음",
+      "level": 4,
+      "score": 0.85
+    },
+    "confidence": 0.85,
+    "crew_recommendation": {
+      "people": {
+        "total": 12,
+        "breakdown": {
+          "대원": 12
+        }
+      },
+      "vehicles": {
+        "total": 4,
+        "breakdown": {
+          "펌프": 2,
+          "사다리": 1,
+          "구급": 1
+        }
+      },
+      "equip": [
+        "고압호스 100m × 2",
+        "사다리(15m)",
+        "열화상 카메라",
+        "연기제거팬"
+      ]
+    }
+  },
+  "keywords": {
+    "incident_type": "화재",
+    "hazards": [
+      "연기"
+    ],
+    "fuel": [],
+    "structure_type": "공동주택",
+    "location_hint": "시애틀 동남구 청담동 한양수자인",
+    "floor": null,
+    "people": {
+      "num_involved": null,
+      "num_trapped": null
+    },
+    "urgency": "HIGH",
+    "confidence": 0.6
+  },
+  "similar_cases": [
+    {
+      "id": "CASE-202307-0142",
+      "summary": "아파트 2층 목재 가구 화재, 연기 다량, 인명대피 12명",
+      "match": 0.5
+    },
+    {
+      "id": "CASE-202402-0310",
+      "summary": "상가 3층 전기화재, 연기 중간, 대피 6명",
+      "match": 0.5
+    }
+  ],
+  "transcript_turns": [
+    {
+      "time": "",
+      "role": "CALLER",
+      "text": "여기 대충 시애틀 동남구 청담동 한양수자인인데 불 개 많이 나고 하얀색 연기 나고 있습니다."
+    },
+    {
+      "time": "",
+      "role": "CALLER",
+      "text": "검은 냄새도 나요."
+    }
+  ]
+}

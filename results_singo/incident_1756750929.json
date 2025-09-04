@@ -1,0 +1,88 @@
+{
+  "incident_id": "1756750929",
+  "now": "2025-09-02T03:22:09+09:00",
+  "elapsed_since_fire": 0,
+  "current_incident": {
+    "date": "2025-09-02",
+    "time": "03시 22분 09초",
+    "address": "",
+    "detail": "아파트 101동",
+    "type": "건물 화재"
+  },
+  "ai_prediction": {
+    "likely_location": "2층 아파트 101동",
+    "cause": null,
+    "risk_level": {
+      "label": "높음",
+      "level": 4,
+      "score": 0.85
+    },
+    "confidence": 0.85,
+    "crew_recommendation": {
+      "people": {
+        "total": 12,
+        "breakdown": {
+          "대원": 12
+        }
+      },
+      "vehicles": {
+        "total": 4,
+        "breakdown": {
+          "펌프": 2,
+          "사다리": 1,
+          "구급": 1
+        }
+      },
+      "equip": [
+        "고압호스 100m × 2",
+        "사다리(15m)",
+        "열화상 카메라",
+        "연기제거팬"
+      ]
+    }
+  },
+  "keywords": {
+    "incident_type": "화재",
+    "hazards": [
+      "연기"
+    ],
+    "fuel": [
+      "목재"
+    ],
+    "structure_type": null,
+    "location_hint": "아파트 101동",
+    "floor": 2,
+    "people": null,
+    "urgency": "HIGH",
+    "confidence": 0.6
+  },
+  "similar_cases": [
+    {
+      "id": "CASE-202307-0142",
+      "summary": "아파트 2층 목재 가구 화재, 연기 다량, 인명대피 12명",
+      "match": 0.8
+    },
+    {
+      "id": "CASE-202402-0310",
+      "summary": "상가 3층 전기화재, 연기 중간, 대피 6명",
+      "match": 0.5
+    }
+  ],
+  "transcript_turns": [
+    {
+      "time": "",
+      "role": "CALLER",
+      "text": "지금 목재 건물 2층에서 불이 났고 연기가 많이 납니다."
+    },
+    {
+      "time": "",
+      "role": "CALLER",
+      "text": "아파트 101동 앞이에요."
+    },
+    {
+      "time": "",
+      "role": "CALLER",
+      "text": "지금 기름 냄새가 많이 납니다."
+    }
+  ]
+}
