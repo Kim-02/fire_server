@@ -5,6 +5,8 @@ from dotenv import load_dotenv
 from pydantic import BaseModel, Field
 from openai import OpenAI
 
+import extractKeys as keys
+
 load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
@@ -21,14 +23,14 @@ class KeywordsV1(BaseModel):
     soot_area: Optional[float] = Field(None, description="화재로 인한 그을음 면적")
     multi_use_flag: Optional[bool] = Field(None, description="다중이용업 여부")
     fuel_type: Optional[str] = Field(None, description="동력원 연료명")
-    fire_management_target_flag: Optional[str] = Field(None, description="방화관리대상 여부")
+    fire_management_target_flag: Optional[bool] = Field(None, description="방화관리대상 여부")
     unit_temperature: Optional[float] = Field(None, description="단위 기온")
     unit_humidity: Optional[float] = Field(None, description="단위 습도")
     unit_wind_speed: Optional[str] = Field(None, description="시간단위 풍속정보")
-    facility_location: Optional[str] = Field(None, description="시설 장소")
-    forest_fire_flag: Optional[bool] = Field(None, description="임야 발화 여부")
+    facility_location: Optional[List[str]] = Field(None, description="시설 장소")
+    forest_fire_flag: Optional[List[str]] = Field(None, description="임야 발화")
     total_floor_count: Optional[int] = Field(None, description="전체 층수")
-    vehicle_fire_flag: Optional[bool] = Field(None, description="차량 화재 여부")
+    vehicle_fire_flag: Optional[List[str]] = Field(None, description="차량 화재 여부")
     ignition_material: Optional[str] = Field(None, description="착화물")
     special_fire_object_name: Optional[str] = Field(None, description="특정 소방대상물명")
     wind_direction: Optional[str] = Field(None, description="풍향 방위")
@@ -51,14 +53,14 @@ SYSTEM_PROMPT = """당신은 119 신고 대화에서 사건 속성을 추출하�
   "soot_area": "float",                     // 화재로 인한 그을음 면적 (㎡)
   "multi_use_flag": "bool",                 // 다중이용업 여부 (병원·백화점·지하상가 등)
   "fuel_type": "string",                    // 주요 연료/연소물
-  "fire_management_target_flag": "string",  // 방화관리대상 여부
+  "fire_management_target_flag": "bool",  // 방화관리대상 여부
   "unit_temperature": "float",              // 단위 기온 (℃)
   "unit_humidity": "float",                 // 단위 습도 (%)
   "unit_wind_speed": "string",              // 단위 풍속 정보 (예: "3 m/s")
-  "facility_location": "string",            // 시설 위치 (옥내/옥외/지하/옥상/주차장 등)
-  "forest_fire_flag": "bool",               // 임야 발화 여부 (산불 여부)
+  "facility_location": "string[]",            // 시설 위치 (옥내/옥외/지하/옥상/주차장 등)
+  "forest_fire_flag": "string[]",               // 임야 발화 여부 (산불 여부)
   "total_floor_count": "int",               // 전체 층수
-  "vehicle_fire_flag": "bool",              // 차량 화재 여부
+  "vehicle_fire_flag": "string[]",              // 차량 화재 여부
   "ignition_material": "string",            // 착화물 (최초 발화 추정 물질)
   "special_fire_object_name": "string",     // 특정 소방대상물명 (변압기, 보일러, 가스탱크 등)
   "wind_direction": "string"                // 풍향 방위 (N, NE, E, SE, S, SW, W, NW) 풍향정보가 주어질 때만
@@ -93,14 +95,14 @@ def _safe_json_extract(text: str) -> Dict[str, Any]:
         "soot_area": 0.0,
         "multi_use_flag": False,
         "fuel_type": None,
-        "fire_management_target_flag": None,
+        "fire_management_target_flag": False,
         "unit_temperature": 0.0,
         "unit_humidity": 0.0,
         "unit_wind_speed": None,
-        "facility_location": None,
-        "forest_fire_flag": False,
+        "facility_location": [],
+        "forest_fire_flag": [],
         "total_floor_count": 0,
-        "vehicle_fire_flag": False,
+        "vehicle_fire_flag": [],
         "ignition_material": None,
         "special_fire_object_name": None,
         "wind_direction": None
@@ -136,14 +138,14 @@ def _normalize_types(data: Dict[str, Any]) -> Dict[str, Any]:
         "soot_area": 0.0,
         "multi_use_flag": False,
         "fuel_type": None,
-        "fire_management_target_flag": None,
+        "fire_management_target_flag": False,
         "unit_temperature": 0.0,
         "unit_humidity": 0.0,
         "unit_wind_speed": None,
-        "facility_location": None,
-        "forest_fire_flag": False,
+        "facility_location": [],
+        "forest_fire_flag": [],
         "total_floor_count": 0,
-        "vehicle_fire_flag": False,
+        "vehicle_fire_flag": [],
         "ignition_material": None,
         "special_fire_object_name": None,
         "wind_direction": None
@@ -153,7 +155,12 @@ def _normalize_types(data: Dict[str, Any]) -> Dict[str, Any]:
     # 리스트 강제 변환
     if not isinstance(base["building_structure"], list):
         base["building_structure"] = [str(base["building_structure"])] if base["building_structure"] else []
-
+    if not isinstance(base["forest_fire_flag"], list):
+        base["forest_fire_flag"] = [str(base["forest_fire_flag"])] if base["forest_fire_flag"] else []
+    if not isinstance(base["vehicle_fire_flag"],list):
+        base["vehicle_fire_flag"] = [str(base["vehicle_fire_flag"])] if base["vehicle_fire_flag"] else []
+    if not isinstance(base["facility_location"], list):
+        base["facility_location"] = [str(base["facility_location"])] if base["facility_location"] else []
     # int 변환
     for key in ["building_agreement_count", "total_floor_count"]:
         try:
@@ -171,7 +178,7 @@ def _normalize_types(data: Dict[str, Any]) -> Dict[str, Any]:
             base[key] = 0.0
 
     # bool 변환
-    for key in ["multi_use_flag", "forest_fire_flag", "vehicle_fire_flag"]:
+    for key in ["multi_use_flag", "fire_management_target_flag"]:
         v = base.get(key)
         if isinstance(v, str):
             base[key] = v.lower() in ["true", "1", "yes", "y"]
@@ -179,8 +186,8 @@ def _normalize_types(data: Dict[str, Any]) -> Dict[str, Any]:
             base[key] = bool(v)
 
     # 문자열 보정
-    for key in ["building_usage_status", "fuel_type", "fire_management_target_flag",
-                "unit_wind_speed", "facility_location", "ignition_material",
+    for key in ["building_usage_status", "fuel_type",
+                "unit_wind_speed", "ignition_material",
                 "special_fire_object_name", "wind_direction"]:
         v = base.get(key)
         base[key] = str(v) if v not in [None, ""] else None
@@ -226,14 +233,14 @@ def prefill_from_rules(text: str) -> Dict[str, Any]:
         "soot_area": 0.0,                        # 면적으로 특정되면 반영
         "multi_use_flag": False,                 # 다중이용시설(병원·백화점·대형점 등) 키워드 시 True
         "fuel_type": None,                       # 주요 연료/연소물 단일 대표
-        "fire_management_target_flag": None,     # (지정여부 불명확 → 규정상 판단 어렵다면 None 유지)
+        "fire_management_target_flag": False,     # (지정여부 불명확 → 규정상 판단 어렵다면 None 유지)
         "unit_temperature": 0.0,                 # “온도 35도/35℃”
         "unit_humidity": 0.0,                    # “습도 60%”
         "unit_wind_speed": None,                 # “풍속 3m/s”
         "facility_location": None,               # “옥내/옥외/지하/옥상/주차장 …”
-        "forest_fire_flag": False,               # 산림/산불/임야 키워드
+        "forest_fire_flag": [],               # 산림/산불/임야 키워드
         "total_floor_count": 0,                  # “6층 건물”
-        "vehicle_fire_flag": False,              # 차량 화재 여부
+        "vehicle_fire_flag": [],              # 차량 화재 여부
         "ignition_material": None,               # 최초 착화 추정물(텍스트에서 우선 후보)
         "special_fire_object_name": None,        # 변압기/보일러/가스탱크 등
         "wind_direction": None                   # N/NE/... (DIR_WORDS 맵)
@@ -290,16 +297,23 @@ def prefill_from_rules(text: str) -> Dict[str, Any]:
             out["ignition_material"] = fuels[0]
 
     # 4) 차량/산림 여부
-    if any(k in t for k in ["차량", "자동차", "트럭", "버스", "오토바이", "승용차", "화물차"]):
-        out["vehicle_fire_flag"] = True
-        # 차량만 언급되고 건물 언급이 전혀 없으면 위치를 옥외로 힌트
-        if not out["building_structure"]:
-            out["facility_location"] = out["facility_location"] or "옥외"
 
-    if any(k in t for k in ["산불", "산림", "임야", "수풀", "야산"]):
-        out["forest_fire_flag"] = True
-        if not out["facility_location"]:
-            out["facility_location"] = "옥외"
+    for kw in ["차량", "자동차", "트럭", "버스", "오토바이", "승용차", "화물차"]:
+        if kw in t:
+            out["vehicle_fire_flag"].append(kw)
+
+    # 관련 키워드가 하나라도 잡히면 facility_location 처리
+    if out["vehicle_fire_flag"] and not out.get("vehicle_fire_flag"):
+        out["vehicle_fire_flag"] = "차량"
+
+
+    for kw in ["산불", "산림", "임야", "수풀", "야산"]:
+        if kw in t:
+            out["forest_fire_flag"].append(kw)
+
+    # 관련 키워드가 하나라도 잡히면 facility_location 처리
+    if out["forest_fire_flag"] and not out.get("facility_location"):
+        out["facility_location"] = "옥외"
 
     # 5) 특수화재물(특정 위험 설비) 키워드
     specials = _match_any(t, SPECIAL_OBJECTS)

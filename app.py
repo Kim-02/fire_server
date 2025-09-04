@@ -214,7 +214,6 @@ async def api_stt(file: UploadFile = File(...)):
     temp_path = R(os.path.join("uploads", f"{uuid.uuid4().hex}{suffix}"))
     with open(temp_path, "wb") as f:
         f.write(await file.read())
-
     try:
         res = transcribe(temp_path)  # { text: "...", ... } 형태 기대
         return {"ok": True, **res}
@@ -295,3 +294,12 @@ def normalize_from_transcript(body: TranscriptIn):
         report_dt=body.report_datetime
     )
     return {"ok": True, "standard": std}
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(
+        "app:app",          # 모듈명:인스턴스
+        host="0.0.0.0",     # 모든 네트워크 인터페이스에서 접근 가능
+        port=8000,
+        reload=True         # 개발 편의용 자동 reload
+    )

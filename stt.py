@@ -6,15 +6,23 @@ from dotenv import load_dotenv
 load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
+
 def convert_to_wav16k(src_path: str) -> str:
     """모든 오디오를 Whisper 친화적 wav(16kHz, mono, PCM)로 변환"""
     dst_path = f"{os.path.splitext(src_path)[0]}_fixed.wav"
-    cmd = f'ffmpeg -y -i "{src_path}" -ar 16000 -ac 1 -acodec pcm_s16le "{dst_path}"'
+    ffmpeg_exe = r"C:\Users\curry\AppData\Local\Microsoft\WinGet\Packages\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\ffmpeg-8.0-full_build\bin\ffmpeg.exe"
+    cmd = f'"{ffmpeg_exe}" -y -i "{src_path}" -ar 16000 -ac 1 -acodec pcm_s16le "{dst_path}"'
+    print(cmd)
     subprocess.run(shlex.split(cmd), check=True)
+
+    print("rum")
     return dst_path
 
 def transcribe(audio_path: str):
+    print("success full go")
     fixed = convert_to_wav16k(audio_path)
+    print("success go 2")
+    print(fixed)
     with open(fixed, "rb") as f:
         tr = client.audio.transcriptions.create(
             model="gpt-4o-mini-transcribe", 

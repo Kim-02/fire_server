@@ -27,7 +27,7 @@ class InfoBlock(BaseModel):
     unit_wind_speed: Optional[str] = None
     facility_location: Optional[str] = None
     combustion_expansion_material: Optional[str] = None
-    forest_fire_flag: Optional[str] = Field(None, pattern="^(Y|N)$")
+    forest_fire_flag: Optional[str] = None
     report_datetime: Optional[str] = None              # YYYY-MM-DD HH:MM:SS
     vehicle_fire_flag: Optional[str] = Field(None, pattern="^(Y|N)$")
     initial_extinguish_datetime: Optional[str] = None  # YYYY-MM-DD HH:MM:SS
