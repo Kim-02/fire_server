@@ -245,10 +245,10 @@ def extract_keywords_both(transcript: str) -> Dict[str, Any]:
     return {"facts": facts, "insights": insights}
 
 # ---------------------- TEST ----------------------
-txt = "여기 강남구 역삼동 오피스텔 12층 건물인데요,지금 6층에서 불이 나서 연기가 심하게 나고 있어요.안에 직원들이 아직 몇 명 있는 것 같아요. 불은 전기 배선 타는 냄새가 납니다."
-print("=== INPUT ===")
-print(txt)
-out = extract_keywords(txt, strict=False)  # 인사이트 병합
-print("=== OUTPUT ===")
-print(json.dumps(out, ensure_ascii=False, indent=2))
-print("→ building_structure:", out["keywords"].get("building_structure"))
+# txt = "여기 강남구 역삼동 오피스텔 12층 건물인데요,지금 6층에서 불이 나서 연기가 심하게 나고 있어요.안에 직원들이 아직 몇 명 있는 것 같아요. 불은 전기 배선 타는 냄새가 납니다."
+# print("=== INPUT ===")
+# print(txt)
+# out = extract_keywords(txt, strict=False)  # 인사이트 병합
+# print("=== OUTPUT ===")
+# print(json.dumps(out, ensure_ascii=False, indent=2))
+# print("→ building_structure:", out["keywords"].get("building_structure"))
