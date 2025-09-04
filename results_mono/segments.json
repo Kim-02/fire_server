@@ -1,0 +1,56 @@
+{
+  "segments": [
+    {
+      "role": "CALLER",
+      "text": "여보세요?",
+      "start": null,
+      "end": null
+    },
+    {
+      "role": "CALLER",
+      "text": "여보세요?",
+      "start": null,
+      "end": null
+    },
+    {
+      "role": "CALLER",
+      "text": "어. 현우 그냥 내가 태워줄게.",
+      "start": null,
+      "end": null
+    },
+    {
+      "role": "CALLER",
+      "text": "어? 뭐야?",
+      "start": null,
+      "end": null
+    },
+    {
+      "role": "CALLER",
+      "text": "범인은 내가 데려갈게.",
+      "start": null,
+      "end": null
+    },
+    {
+      "role": "CALLER",
+      "text": "어 어.",
+      "start": null,
+      "end": null
+    },
+    {
+      "role": "CALLER",
+      "text": "오케이.",
+      "start": null,
+      "end": null
+    },
+    {
+      "role": "CALLER",
+      "text": "예스.",
+      "start": null,
+      "end": null
+    }
+  ],
+  "merged": {
+    "caller": "여보세요? 여보세요? 어. 현우 그냥 내가 태워줄게. 어? 뭐야? 범인은 내가 데려갈게. 어 어. 오케이. 예스.",
+    "operator": ""
+  }
+}

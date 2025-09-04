@@ -1,0 +1,26 @@
+{
+  "segments": [
+    {
+      "role": "CALLER",
+      "text": "지금 목재 건물 2층에서 불이 났고 연기가 많이 납니다.",
+      "start": null,
+      "end": null
+    },
+    {
+      "role": "CALLER",
+      "text": "아파트 101동 앞이에요.",
+      "start": null,
+      "end": null
+    },
+    {
+      "role": "CALLER",
+      "text": "지금 기름 냄새가 많이 납니다.",
+      "start": null,
+      "end": null
+    }
+  ],
+  "merged": {
+    "caller": "지금 목재 건물 2층에서 불이 났고 연기가 많이 납니다. 아파트 101동 앞이에요. 지금 기름 냄새가 많이 납니다.",
+    "operator": ""
+  }
+}

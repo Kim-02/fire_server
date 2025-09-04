@@ -1,0 +1,38 @@
+{
+  "fire_data_pk": null,
+  "numeric": {
+    "building_agreement_count": null,
+    "total_floor_area": null,
+    "soot_area": null,
+    "floor_area": null,
+    "ignition_floor": null,
+    "casualty_count": 0,
+    "unit_temperature": null,
+    "unit_humidity": null,
+    "property_damage_amount": null,
+    "total_floor_count": null
+  },
+  "info": {
+    "building_structure": null,
+    "building_usage_status": null,
+    "multi_use_flag": "N",
+    "fuel_type": null,
+    "ignition_device": null,
+    "ignition_heat_source": null,
+    "ignition_cause": null,
+    "fire_management_target_flag": "N",
+    "fire_station_name": null,
+    "unit_wind_speed": null,
+    "facility_location": null,
+    "combustion_expansion_material": null,
+    "forest_fire_flag": "N",
+    "report_datetime": "2025-09-03 16:55:26",
+    "vehicle_fire_flag": "N",
+    "initial_extinguish_datetime": null,
+    "ignition_material": null,
+    "special_fire_object_name": null,
+    "wind_direction": null,
+    "arrival_datetime": null,
+    "fire_type": "건물 화재"
+  }
+}

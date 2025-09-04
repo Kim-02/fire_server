@@ -1,0 +1,106 @@
+{
+  "incident_id": "1756834689",
+  "now": "2025-09-03T02:38:09+09:00",
+  "elapsed_since_fire": 0,
+  "current_incident": {
+    "date": "2025-09-03",
+    "time": "02시 38분 09초",
+    "address": "",
+    "detail": "한국기술교육대학교 담원실학관",
+    "type": "건물 화재"
+  },
+  "ai_prediction": {
+    "likely_location": "6층 한국기술교육대학교 담원실학관",
+    "cause": null,
+    "risk_level": {
+      "label": "높음",
+      "level": 4,
+      "score": 0.9
+    },
+    "confidence": 0.9,
+    "crew_recommendation": {
+      "people": {
+        "total": 12,
+        "breakdown": {
+          "대원": 12
+        }
+      },
+      "vehicles": {
+        "total": 4,
+        "breakdown": {
+          "펌프": 2,
+          "사다리": 1,
+          "구급": 1
+        }
+      },
+      "equip": [
+        "고압호스 100m × 2",
+        "사다리(15m)",
+        "열화상 카메라",
+        "연기제거팬"
+      ]
+    }
+  },
+  "keywords": {
+    "incident_type": "화재",
+    "hazards": [
+      "연기"
+    ],
+    "fuel": [
+      "고무"
+    ],
+    "structure_type": "공동주택",
+    "location_hint": "한국기술교육대학교 담원실학관",
+    "floor": 6,
+    "people": {
+      "num_involved": null,
+      "num_trapped": null
+    },
+    "urgency": "HIGH",
+    "confidence": 0.6
+  },
+  "similar_cases": [
+    {
+      "id": "CASE-202307-0142",
+      "summary": "아파트 2층 목재 가구 화재, 연기 다량, 인명대피 12명",
+      "match": 0.5
+    },
+    {
+      "id": "CASE-202402-0310",
+      "summary": "상가 3층 전기화재, 연기 중간, 대피 6명",
+      "match": 0.5
+    }
+  ],
+  "transcript_turns": [
+    {
+      "time": "",
+      "role": "CALLER",
+      "text": "여보세요. 불이 나와서요."
+    },
+    {
+      "time": "",
+      "role": "CALLER",
+      "text": "지금 위치가 한국기술교육대학교 담원실학관이고요."
+    },
+    {
+      "time": "",
+      "role": "CALLER",
+      "text": "불이 너무 많이 나는데 연기도 너무 많이 나고 연기는 하얀색이에요."
+    },
+    {
+      "time": "",
+      "role": "CALLER",
+      "text": "그리고 뭔가 좀 고무 타는 냄새도 많이 나고 여기 6층 건물입니다."
+    },
+    {
+      "time": "",
+      "role": "CALLER",
+      "text": "연기가 엄청 많이 나고 불 난 지 한 10분 정도 된 것 같아요."
+    },
+    {
+      "time": "",
+      "role": "CALLER",
+      "text": "빨리 와주세요."
+    }
+  ]
+}

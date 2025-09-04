@@ -1,0 +1,44 @@
+{
+  "segments": [
+    {
+      "role": "CALLER",
+      "text": "여보세요. 네, 지금 불이 나서요.",
+      "start": null,
+      "end": null
+    },
+    {
+      "role": "CALLER",
+      "text": "지금 여기 위치가 한국기술교육대학교 담원실학관이고요.",
+      "start": null,
+      "end": null
+    },
+    {
+      "role": "CALLER",
+      "text": "지금 불이 너무 많이 나는데 연기도 너무 많이 나고 연기는 하얀색이에요.",
+      "start": null,
+      "end": null
+    },
+    {
+      "role": "CALLER",
+      "text": "그리고 뭔가 좀 고무 타는 냄새도 많이 나고 여기 6층 건물입니다.",
+      "start": null,
+      "end": null
+    },
+    {
+      "role": "CALLER",
+      "text": "연기가 엄청 많이 나고 불 난지 한 10분 정도 된 것 같아요.",
+      "start": null,
+      "end": null
+    },
+    {
+      "role": "CALLER",
+      "text": "빨리 와주세요.",
+      "start": null,
+      "end": null
+    }
+  ],
+  "merged": {
+    "caller": "여보세요. 네, 지금 불이 나서요. 지금 여기 위치가 한국기술교육대학교 담원실학관이고요. 지금 불이 너무 많이 나는데 연기도 너무 많이 나고 연기는 하얀색이에요. 그리고 뭔가 좀 고무 타는 냄새도 많이 나고 여기 6층 건물입니다. 연기가 엄청 많이 나고 불 난지 한 10분 정도 된 것 같아요. 빨리 와주세요.",
+    "operator": ""
+  }
+}
